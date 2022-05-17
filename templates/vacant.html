@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Payments{% endblock %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Vacants</title>
+</head>
+<body>
+<h2>VACANTS</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Features</th>
+            <th>Location</th>
+            <th>House_No </th>
+
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in value %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.features}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.house_no}}</td>
+
+
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tenants{% endblock %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel = "stylesheet">
+
+    <title>Tenants</title>
+</head>
+<body>
+<h2>TENANTS</h2>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>National ID</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>House</th>
+            <th>Registration Date</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in value %}
+            <tr class="active-row">
+                <td>{{item.id}}</td>
+                <td>{{item.fullnames}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.national_id}}</td>
+                <td>{{item.phone_number}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.house_no}}</td>
+                <td>{{item.registration_date}}</td>
+
+
+
+
+
+
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,207 @@
+{% extends 'layout.html' %}
+
+{% block title %}Houses{% endblock %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel = "stylesheet">
+
+    <title>Houses</title>
+
+</head>
+<body>
+<h2>HOUSES</h2>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+
+                <h2>House List <button type="button" class="btn btn-success pull-right"
+                                       data-toggle="modal" data-target="#mymodal">Add House </button></h2>
+
+        {%with messages = get_flashed_messages()%}
+
+        {%if messages%}
+
+        {% for message in messages %}
+
+        <div class="alert alert-success alert-dismissable" role="alert">
+
+         <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+             <span aria-hidden="true">&times;</span>
+
+         </button>
+            {{message}}
+
+
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+    </div>
+
+
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>HouseNo</th>
+                <th>features</th>
+                <th>Rent</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in value %}
+                <tr class="active-row">
+                    <td>{{item.id}}</td>
+                    <td>{{item.house_number}}</td>
+                    <td>{{item.features}}</td>
+                    <td>{{item.rent}}</td>
+                    <td>{{item.status}}</td>
+                    <td>
+                        <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Edit</a>
+                        <a href="" class="btn danger btn-xs" onclick="return confirm('Are you  sure to Delete?')">Delete</a>
+
+
+                    </td>
+
+                </tr>
+                     <div id="modaledit" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+            {% endfor %}
+        <div class="modal-body">
+            <form action="{{ url_for('update') }}" method="POST">
+               <div class="form-group">
+                  <label>id:</label>
+                   <input type="hidden"  name="id" value="">
+                  <input type="text" class="form-control" name="id" value="}">
+               </div>
+
+                <div class="form-group">
+                  <label>Name:</label>
+                   <input type="hidden"  name="name" value="">
+                  <input type="text" class="form-control" name="id" value="">
+               </div>
+
+                <div class="form-group">
+                  <label>HouseNo:</label>
+                   <input type="hidden"  name="HouseNo" value="">
+                  <input type="text" class="form-control" name="house_number" value="">
+               </div>
+
+                <div class="form-group">
+                  <label>Features:</label>
+                   <input type="hidden"  name="features" value="">
+                  <input type="text" class="form-control" name="features" value="">
+               </div>
+
+                <div class="form-group">
+                  <label>Rent:</label>
+                   <input type="hidden"  name="Rent" value="">
+                  <input type="text" class="form-control" name="rent" value="">
+               </div>
+
+                <div class="form-group">
+                  <label>Status:</label>
+                   <input type="hidden"  name="status" value="">
+                  <input type="text" class="form-control" name="status" value="">
+               </div>
+
+            </form>
+        </div>
+      </div>
+   </div>
+                     </div>
+        </tbody>
+    </table>
+
+            </div>
+        </div>
+</div>
+
+    <div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Insert Data</h4>
+         </div>
+         <div class="modal-body">
+            <form action = "{{url_for('insert')}}" method="POST" >
+                <div class="form-group">
+                    <label>id:</label>
+                    <input type="text" class="form-control" name="id" required="1">
+                </div>
+
+                <div class="form-group">
+                    <label>HouseNo:</label>
+                    <input type="text" class="form-control" name="HouseNo" required="1">
+                </div>
+
+                <div class="form-group">
+                    <label>features:</label>
+                    <input type="text" class="form-control" name="features" required="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Rent:</label>
+                    <input type="text" class="form-control" name="Rent" required="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Status:</label>
+                    <input type="text" class="form-control" name="Status" required="1">
+                </div>
+                <div class="form-group">
+                <input type="hidden" name="id" value="1">
+
+     <input type="hidden" name="action" value="edit">
+     <input type="submit" class="btn btn-success" name="submit" value="Add House">
+    </div>
+    </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+</div>
+</body>
+
+{% endblock %}
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+</html>
+
